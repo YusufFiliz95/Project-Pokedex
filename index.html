@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <!--Bootstrap: CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!--Bootstrap: JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="fonts/gameboy.ttf">
+    <link rel="icon" href="img/pokeball.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+</head>
+
+<body onload="init()">
+    <!--Header section-->
+    <div w3-include-html="includes/header.html" class="header-section d-none" id="header"></div>
+
+<div class="pokedex-center">
+    <div id="pokedex" class="d-none">
+        <!-- Left Panel -->
+        <div id="left-panel">
+            <!-- Top lights -->
+            <div class="left-top-container">
+                <svg height="200" width="525" class="left-svg">
+                    <polyline points="0,140 120,140 150,68 450,68" style="fill:none;stroke:black;stroke-width:3" />
+                </svg>
+                <div class="lights-container">
+                    <div class="big-light-boarder">
+                        <div class="big-light blue">
+                            <div class="big-dot light-blue"></div>
+                        </div>
+                    </div>
+                    <div class="small-lights-container">
+                        <div class="small-light red">
+                            <div class="dot light-red"></div>
+                        </div>
+                        <div class="small-light yellow">
+                            <div class="dot light-yellow"></div>
+                        </div>
+                        <div class="small-light green">
+                            <div class="dot light-green"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Center Screen -->
+            <div class="screen-container">
+                <div class="screen">
+                    <div class="top-screen-lights">
+                        <div class="mini-light red"></div>
+                        <div class="mini-light red"></div>
+                    </div>
+                    <div id="main-screen"></div>
+                    <div class="bottom-screen-lights">
+                        <div class="small-light red">
+                            <div class="dot light-red"></div>
+                        </div>
+                        <div class="burger">
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Buttons -->
+            <div class="buttons-container">
+                <div class="upper-buttons-container">
+                    <div class="big-button"></div>
+                    <div class="long-buttons-container">
+                        <div class="long-button red"></div>
+                        <div class="long-button light-blue"></div>
+                    </div>
+                </div>
+                <div class="nav-buttons-container">
+                    <div class="dots-container">
+                        <div>.</div>
+                        <div>.</div>
+                    </div>
+                    <div class="green-screen">
+                        <span id="name-screen">bulbasaur</span>
+                    </div>
+                    <div class="right-nav-container">
+                        <div class="nav-button">
+                            <div class="nav-center-circle"></div>
+                            <div class="nav-button-vertical"></div>
+                            <div class="nav-button-horizontal">
+                                <div class="left-arrow-button" onclick="previousPokemon()"></div>
+                                <div class="right-arrow-button" onclick="nextPokemon()"></div>
+                            </div>
+                        </div>
+                        <div class="bottom-right-nav-container">
+                            <div class="small-light red">
+                                <div class="dot light-red"></div>
+                            </div>
+                            <div class="dots-container">
+                                <div class="black-dot">.</div>
+                                <div class="black-dot">.</div>
+                                <div class="black-dot">.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Left panel -->
+
+        <!-- Right-panel -->
+        <div id="right-panel">
+            <!-- Blank container -->
+            <div class="empty-container">
+                <svg height="100%" width="100%">
+                    <polyline points="270,0 330,140 900,140 500,0 456,140 456,0 0,0"style="fill: rgb(112, 112, 112); stroke: ; stroke-width: 3"/>
+                    <polyline points="0,0 0,70 500,71 500,0 456,140 456,0 0,0"style="fill: rgb(112, 112, 112); stroke: none; stroke-width: 3" />
+                    <polyline points="0,71 300,71 330,140 500,140" style="fill: none; stroke: black; stroke-width: 3" />
+                </svg>
+            </div>
+            <!-- Top screen -->
+            <div class="top-screen-container">
+                <div id="about-screen" class="right-panel-screen">
+                    <div class="right-panel-screen-flex">
+                        <div class="display-flex margin-cm">
+                            <div>Height:</div><div id="currentpokemonheight">80cm</div>
+                        </div>
+                        <div class="display-flex margin-ability">
+                            <div>Ability:</div><div id="currentpokemonability">Attack</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Blue Buttons -->
+            <div class="square-buttons-container">
+                <div class="blue-squares-container">
+                    <div class="blue-square"></div>
+                    <div class="blue-square"></div>
+                    <div class="blue-square"></div>
+                    <div class="blue-square"></div>
+                    <div class="blue-square"></div>
+                    <div class="blue-square"></div>
+                    <div class="blue-square"></div>
+                    <div class="blue-square"></div>
+                    <div class="blue-square"></div>
+                    <div class="blue-square"></div>
+                    <div class="blue-square"></div>
+                    <div class="blue-square"></div>
+                </div>
+            </div>
+            <!-- Center Buttons -->
+            <div class="center-buttons-container">
+                <div class="center-left-container">
+                    <div class="small-reds-container">
+                        <div class="small-light red">
+                            <div class="dot light-red"></div>
+                        </div>
+                        <div class="small-light red">
+                            <div class="dot light-red"></div>
+                        </div>
+                    </div>
+                    <div class="white-squares-container">
+                        <div class="white-square"></div>
+                        <div class="white-square"></div>
+                    </div>
+                </div>
+                <div class="center-right-container">
+                    <div class="thin-buttons-container">
+                        <div class="thin-button"></div>
+                        <div class="thin-button"></div>
+                    </div>
+                    <div class="yellow-button yellow">
+                        <div class="big-dot light-yellow"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom screens -->
+            <div class="bottom-screens-container">
+                <div id="type-screen" class="right-panel-screen type">
+                    <div class="type-1">
+                        <span id="type1">grass</span>
+                    </div>
+                    <div class="type-2">
+                        <span id="type2">poison</span>
+                    </div>
+                </div>
+                <div id="id-screen" class="right-panel-screen id">#1</div>
+            </div>
+        </div>
+    </div>
+    <div class="eight-bit-pokemon-background d-none" id="eightbitpokemon"></div>
+</div>
+    <div id="allpokemons" class="all-pokemons d-none"></div>
+    <button id="loadmorebtn" class="load-more-pokemons d-none border-step3 framed primary exclude-border" onclick="loadMorePokemons()">Load More</button>
+
+        <!--Responsive-->
+        <div w3-include-html="includes/responsive.html" class="responsive-section"></div>
+
+    <div class="loading-screen" id="loadingscreen">LOADING POKEMONS <span id="dot1">.</span><span id="dot2">.</span><span id="dot3">.</span></div>
+    
+</body>
+
+</html>
